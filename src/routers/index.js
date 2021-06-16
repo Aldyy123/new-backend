@@ -2,7 +2,7 @@ const app = require('express')()
 const product = require('./product-router')
 const user = require('./user-router')
 
-app.get('/', (req, res) => res.send('Haloo ini'))
+app.get('/', (req, res) => res.send('<h1>Haloo ini</h1>'))
 app.use('/products', product)
 app.use('/users', user)
 
