@@ -5,6 +5,7 @@ const user = require('./user-router')
 app.get('/', (req, res) => {
   res.setHeader('Content-Type', 'text/html')
   res.send('<h1>Welcome</h1>')
+  res.send('<h3>In REST API</h3>')
 })
 app.use('/products', product)
 app.use('/users', user)
