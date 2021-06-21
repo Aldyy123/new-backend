@@ -21,4 +21,11 @@ const schema = new mongoose.Schema(
   }
 )
 
+schema.statics = {
+  async checkedFindId (id) {
+    if (!mongoose.isValidObjectId(id)) return []
+    return this.findById(id)
+  }
+}
+
 module.exports = mongoose.model('Product', schema)

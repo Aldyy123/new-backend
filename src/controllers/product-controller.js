@@ -1,27 +1,40 @@
 const ProductModel = require('../models/product-model')
-const { ErrorHandler } = require('../middlewares/errorHandle')
+const { handleError, handleSuccess } = require('../middlewares/errorHandle')
 
 class ProductController {
   async listProducts (req, res) {
+    const limit = parseInt(req.body.limit)
+    const skip = parseInt(req.body.skip)
+    const search = req.body.search
+    const regex = new RegExp(search, 'gi')
+    const type = req.body.type
     try {
-      const products = await ProductModel.find().limit(20)
-      res.json(products)
+      const products = await ProductModel.find({ name: regex })
+        .limit(limit)
+        .skip(skip)
+        .sort({ createdAt: 'desc' })
+        .where('product', type)
+      if (products.length <= 0) {
+        handleError({ statusCode: 404, message: 'Product not found' }, res)
+      } else {
+        handleSuccess(products, res)
+      }
     } catch (error) {
-      res.json(new ErrorHandler(404, error.message))
+      handleError(error, res)
     }
   }
 
   async getProduct (req, res) {
-    const { name } = req.body
+    const { id } = req.params
     try {
-      const product = await ProductModel.find({ name: name })
+      const product = await ProductModel.checkedFindId(id)
       if (product.length < 1) {
-        res.json(404, { error: 'Product not found' })
+        handleError({ message: 'Product not found', statusCode: 404 }, res)
       } else {
-        res.json(product)
+        handleSuccess(product, res)
       }
     } catch (error) {
-      throw new ErrorHandler(404, error.message)
+      handleError(error, res)
     }
   }
 
@@ -36,7 +49,7 @@ class ProductController {
         res.json(result)
       }
     } catch (error) {
-      throw new ErrorHandler(404, error.message)
+      handleError(error, res)
     }
   }
 
@@ -46,14 +59,13 @@ class ProductController {
     try {
       const exist = await ProductModel.exists({ name: req.body.name })
       if (exist) {
-        res.status(404)
-        res.json({ error: true, message: 'Product Already Exists' })
-      } else {
         const update = await ProductModel.updateOne({ _id: id }, { body })
-        res.json(update)
+        handleSuccess(update, res)
+      } else {
+        handleError({ statusCode: 404, message: 'Product not found' }, res)
       }
     } catch (error) {
-      throw new ErrorHandler(404, error.message)
+      handleError(error, res)
     }
   }
 }

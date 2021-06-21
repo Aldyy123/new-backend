@@ -20,7 +20,7 @@ app.use((err, req, res, next) => {
   console.log('Ini error')
 })
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8000
 app.listen(PORT, () => {
   console.log(`Our app is running on port ${PORT}`)
 })
