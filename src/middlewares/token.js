@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const { secret } = require('../config/Config')
 const { ErrorHandler, handleError } = require('./errorHandle')
 class WebToken {
-  async generateToken (user) {
+  async generateToken(user) {
     try {
       const token = await jwt.sign({ user }, secret)
       return token
@@ -11,11 +11,15 @@ class WebToken {
     }
   }
 
-  async verifyToken (req, res, next) {
-    const token = req.headers.authorization.split(' ')[1]
+  async verifyToken(req, res, next) {
     try {
-      await jwt.verify(token, secret)
-      next()
+      if (req.headers.authorization !== undefined) {
+        const token = req.headers.authorization.split(' ')[1]
+        await jwt.verify(token, secret)
+        next()
+      } else {
+        handleError({ statusCode: 500, message: 'server' })
+      }
     } catch (error) {
       handleError({ statusCode: 500, message: 'server' }, res)
     }
