@@ -11,7 +11,7 @@ const handleError = (err, res) => {
   return res.status(code).json({
     status: 'error',
     code,
-    message: `Ups An Error ${message}`
+    message
   })
 }
 

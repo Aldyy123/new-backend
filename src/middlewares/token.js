@@ -18,10 +18,10 @@ class WebToken {
         await jwt.verify(token, secret)
         next()
       } else {
-        handleError({ statusCode: 500, message: 'server' })
+        handleError({ statusCode: 500, message: 'API Pribadi, harus minta access ke pemilik ya :)' })
       }
     } catch (error) {
-      handleError({ statusCode: 500, message: 'server' }, res)
+      handleError({ statusCode: 500, message: 'API Pribadi, harus minta access ke pemilik ya :)' }, res)
     }
   }
 }
