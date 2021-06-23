@@ -12,7 +12,7 @@ const schema = new mongoose.Schema(
     description: String,
     product: {
       type: String,
-      enum: ['games', 'invitation'],
+      enum: ['games', 'printing', 'atk'],
       required: true
     }
   },
