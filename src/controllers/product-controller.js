@@ -1,23 +1,25 @@
 const ProductModel = require('../models/product-model')
 const { handleError, handleSuccess } = require('../middlewares/errorHandle')
+const { sortBy } = require('../utils/utlis')
 
 class ProductController {
-  /**
-   * @apiName GetProducts
-   * @apiDefine Get Access All products
-   * @api GET products/ Products Arsy
-  */
   async listProducts (req, res) {
+    /**
+     * @apiName GetProducts
+     * @apiDefine Get Access All products
+     * @api GET products/ Products Arsy
+    */
     const limit = parseInt(req.query.limit)
     const skip = parseInt(req.query.skip)
     const search = req.query.search
     const regex = new RegExp(search, 'gi')
     const type = req.query.type
+    const sort = sortBy(req.query.sort)
     try {
       const products = await ProductModel.find({ name: regex })
         .limit(limit)
         .skip(skip)
-        .sort({ createdAt: 'desc' })
+        .sort(sort)
         .where('product', type)
       if (products.length <= 0) {
         handleError({ statusCode: 200, message: 'Product not found' }, res)
