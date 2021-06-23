@@ -2,6 +2,11 @@ const ProductModel = require('../models/product-model')
 const { handleError, handleSuccess } = require('../middlewares/errorHandle')
 
 class ProductController {
+  /**
+   * @apiName GetProducts
+   * @apiDefine Get Access All products
+   * @api GET products/ Products Arsy
+  */
   async listProducts (req, res) {
     const limit = parseInt(req.query.limit)
     const skip = parseInt(req.query.skip)
@@ -15,7 +20,7 @@ class ProductController {
         .sort({ createdAt: 'desc' })
         .where('product', type)
       if (products.length <= 0) {
-        handleError({ statusCode: 404, message: 'Product not found' }, res)
+        handleError({ statusCode: 200, message: 'Product not found' }, res)
       } else {
         handleSuccess(products, res)
       }
@@ -29,7 +34,7 @@ class ProductController {
     try {
       const product = await ProductModel.checkedFindId(id)
       if (product.length < 1) {
-        handleError({ message: 'Product not found', statusCode: 404 }, res)
+        handleError({ message: 'Product not found', statusCode: 200 }, res)
       } else {
         handleSuccess(product, res)
       }
@@ -42,7 +47,7 @@ class ProductController {
     try {
       const exist = await ProductModel.exists({ name: req.body.name })
       if (exist) {
-        res.json(404, { error: true, message: 'Product Already Exists' })
+        res.json(200, { error: true, message: 'Product Already Exists' })
       } else {
         const product = await new ProductModel(req.body)
         const result = await product.save()
@@ -62,7 +67,7 @@ class ProductController {
         const update = await ProductModel.updateOne({ _id: id }, { body })
         handleSuccess(update, res)
       } else {
-        handleError({ statusCode: 404, message: 'Product not found' }, res)
+        handleError({ statusCode: 200, message: 'Product not found' }, res)
       }
     } catch (error) {
       handleError(error, res)
