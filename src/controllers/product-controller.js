@@ -3,11 +3,11 @@ const { handleError, handleSuccess } = require('../middlewares/errorHandle')
 
 class ProductController {
   async listProducts (req, res) {
-    const limit = parseInt(req.body.limit)
-    const skip = parseInt(req.body.skip)
-    const search = req.body.search
+    const limit = parseInt(req.query.limit)
+    const skip = parseInt(req.query.skip)
+    const search = req.query.search
     const regex = new RegExp(search, 'gi')
-    const type = req.body.type
+    const type = req.query.type
     try {
       const products = await ProductModel.find({ name: regex })
         .limit(limit)
