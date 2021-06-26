@@ -22,15 +22,15 @@ Router.get('/', Token.verifyToken, productController.listProducts)
 
 Router.route('/add-product').post(
   Token.verifyToken,
-  productController.saveProduct,
+  productController.saveProduct
 )
 Router.route('/update-product/:id').post(
   Token.verifyToken,
-  productController.updateProduct,
+  productController.updateProduct
 )
 Router.route('/get-product/:id').get(
   Token.verifyToken,
-  productController.getProduct,
+  productController.getProduct
 )
 
 module.exports = Router

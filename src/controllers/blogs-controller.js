@@ -7,7 +7,7 @@ const blogsCreate = async (req, res) => {
     if (exist) {
       handleError(
         { statusCode: 200, message: 'Title Name already exists' },
-        res,
+        res
       )
     } else {
       const blog = await new Blogs(req.body)
