@@ -1,0 +1,201 @@
+openapi: 3.1.0
+info:
+  title: products
+  version: '1.0'
+  description: ''
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /products:
+    parameters: []
+    get:
+      summary: Get All products Arsy
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    status: success
+                    code: 200
+                    result:
+                      - _id: 60c8e0790cc7023578642fe4
+                        name: Undangan 1
+                        price: 2000
+                        description: ini cuma descripsi biasa
+                        product: printing
+                        images: 'https://firebasestorage.googleapis.com/v0/b/arsy-70f02.appspot.com/o/1.jpg?alt=media&token=573c900d-4b0d-402f-bdd5-60a6ad2152fe'
+                        __v: 0
+                        createdAt: '2021-06-15T17:16:41.428Z'
+                        updatedAt: '2021-06-15T17:16:41.428Z'
+                properties:
+                  status:
+                    type: string
+                    minLength: 1
+                  code:
+                    type: number
+                  result:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          minLength: 1
+                        name:
+                          type: string
+                          minLength: 1
+                        price:
+                          type: number
+                        description:
+                          type: string
+                          minLength: 1
+                        product:
+                          type: string
+                          minLength: 1
+                        images:
+                          type: string
+                          minLength: 1
+                        createdAt:
+                          type: string
+                          minLength: 1
+                        updatedAt:
+                          type: string
+                          minLength: 1
+                      required:
+                        - name
+                        - price
+                        - description
+                        - product
+                        - images
+                required:
+                  - result
+              examples:
+                example-1:
+                  value: {}
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  status:
+                    type: string
+                    minLength: 1
+                  code:
+                    type: number
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - code
+                  - message
+                x-examples:
+                  example-1:
+                    status: error
+                    code: 404
+                    message: Product not found
+      operationId: get-products
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: type
+          description: 'type in product [ ''game, printing, atk]'
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: authorization
+          description: Your Token
+          required: true
+      description: GEt All Products Arsy
+  /add-product:
+    post:
+      summary: Create New User
+      operationId: post-product
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                images:
+                  type:
+                    - string
+                    - array
+                  items:
+                    type: string
+                price:
+                  type: number
+                description:
+                  type: string
+              required:
+                - name
+                - images
+                - price
+                - description
+            examples: {}
+        description: Post the necessary fields for the API to create a new user.
+      description: Add Product to database
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: authorization
+          description: Your Token
+    parameters: []
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ''
+      examples: []
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+          format: unique
+        name:
+          type: string
+          format: unique
+        images:
+          type: array
+          items:
+            type: string
+        price:
+          type: number
+          format: number
+        createDate:
+          type: string
+          format: date
+          description: The date that the user was created.
+        description:
+          type: string
+        product:
+          type: string
+          enum:
+            - games
+            - printing
+            - atk
+      required:
+        - id
+        - name
+        - images
+        - price
+        - description
+        - product
+  securitySchemes: {}
