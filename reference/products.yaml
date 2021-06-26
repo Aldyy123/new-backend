@@ -79,7 +79,18 @@ paths:
                   - result
               examples:
                 example-1:
-                  value: {}
+                  value:
+                    status: string
+                    code: 0
+                    result:
+                      - _id: string
+                        name: string
+                        price: 0
+                        description: string
+                        product: string
+                        images: string
+                        createdAt: string
+                        updatedAt: string
         '404':
           description: Not Found
           content:
@@ -105,6 +116,12 @@ paths:
                     status: error
                     code: 404
                     message: Product not found
+              examples:
+                example-1:
+                  value:
+                    status: Error
+                    code: 404
+                    message: Products Not Found
       operationId: get-products
       parameters:
         - schema:
@@ -119,8 +136,18 @@ paths:
           name: authorization
           description: Your Token
           required: true
+        - schema:
+            type: string
+          in: query
+          name: sort
+          description: Sortir price and date
+        - schema:
+            type: string
+          in: query
+          name: search
+          description: For searching product
       description: GEt All Products Arsy
-  /add-product:
+  /products/add-product:
     post:
       summary: Create New User
       operationId: post-product
@@ -142,13 +169,27 @@ paths:
                   type: number
                 description:
                   type: string
+                product:
+                  type: string
+                  enum:
+                    - games
+                    - atk
+                    - printing
               required:
                 - name
                 - images
                 - price
                 - description
-            examples: {}
-        description: Post the necessary fields for the API to create a new user.
+                - product
+            examples:
+              example-1:
+                value:
+                  name: string
+                  images: string
+                  price: 0
+                  description: string
+                  product: games
+        description: New Product add to database
       description: Add Product to database
       parameters:
         - schema:
@@ -156,14 +197,154 @@ paths:
           in: header
           name: authorization
           description: Your Token
+          required: true
     parameters: []
+  '/products/get-product/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Get Id product to detail
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    status: success
+                    code: 200
+                    result:
+                      _id: 60c8e0790cc7023578642fe5
+                      name: Undangan 2
+                      price: 2000
+                      description: ini cuma descripsi biasa
+                      product: printing
+                      images: 'https://firebasestorage.googleapis.com/v0/b/arsy-70f02.appspot.com/o/IMG_20210407_140426.jpg?alt=media&token=2cd1ba25-603e-48b2-bcb3-48ddb620ae79'
+                      __v: 0
+                      createdAt: '2021-06-15T17:16:41.429Z'
+                      updatedAt: '2021-06-15T17:16:41.429Z'
+                properties:
+                  status:
+                    type: string
+                    minLength: 1
+                  code:
+                    type: number
+                  result:
+                    type: object
+                    required:
+                      - _id
+                      - name
+                      - price
+                      - description
+                      - product
+                      - images
+                    properties:
+                      _id:
+                        type: string
+                        minLength: 1
+                      name:
+                        type: string
+                        minLength: 1
+                      price:
+                        type: number
+                      description:
+                        type: string
+                        minLength: 1
+                      product:
+                        type: string
+                        minLength: 1
+                      images:
+                        type: string
+                        minLength: 1
+                      createdAt:
+                        type: string
+                        minLength: 1
+                      updatedAt:
+                        type: string
+                        minLength: 1
+                required:
+                  - status
+                  - code
+                  - result
+              examples:
+                example-1:
+                  value:
+                    status: success
+                    code: 200
+                    result:
+                      _id: 60c8e0790cc7023578642fe5
+                      name: Undangan 2
+                      price: 2000
+                      description: ini cuma descripsi biasa
+                      product: printing
+                      images: 'https://firebasestorage.googleapis.com/v0/b/arsy-70f02.appspot.com/o/IMG_20210407_140426.jpg?alt=media&token=2cd1ba25-603e-48b2-bcb3-48ddb620ae79'
+                      __v: 0
+                      createdAt: '2021-06-15T17:16:41.429Z'
+                      updatedAt: '2021-06-15T17:16:41.429Z'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  status:
+                    type: string
+                    minLength: 1
+                  code:
+                    type: number
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - code
+                  - message
+                x-examples:
+                  example-1:
+                    status: error
+                    code: 200
+                    message: Product not found
+              examples:
+                example-1:
+                  value:
+                    status: error
+                    code: 404
+                    message: Product not found
+      operationId: get-products-id
+      description: ''
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: authorization
+          description: Your Token
 components:
   schemas:
     User:
-      title: User
+      title: Products
       type: object
       description: ''
-      examples: []
+      examples:
+        - _id: 60c8e0790cc7023578642fe5
+          name: Undangan 2
+          price: 2000
+          description: ini cuma descripsi biasa
+          product: printing
+          images: 'https://firebasestorage.googleapis.com/v0/b/arsy-70f02.appspot.com/o/IMG_20210407_140426.jpg?alt=media&token=2cd1ba25-603e-48b2-bcb3-48ddb620ae79'
+          __v: 0
+          createdAt: '2021-06-15T17:16:41.429Z'
+          updatedAt: '2021-06-15T17:16:41.429Z'
       properties:
         id:
           type: integer
@@ -199,3 +380,4 @@ components:
         - description
         - product
   securitySchemes: {}
+  responses: {}
