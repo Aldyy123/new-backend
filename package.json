@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "nodemon": "nodemon ./src/index.js",
     "start": "node ./src/index.js",
-    "fix": "eslint ./src --fix"
+    "fix": "eslint ./src --fix",
+    "apidoc": "apidoc -i src/ -o apidoc/ -e node_modules"
   },
   "author": "",
   "license": "ISC",

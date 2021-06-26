@@ -7,12 +7,12 @@ const schema = new mongoose.Schema(
       required: true,
       unique: true
     },
-    images: String,
+    images: Array,
     price: Number,
     description: String,
     product: {
       type: String,
-      enum: ['games', 'invitation'],
+      enum: ['games', 'printing', 'atk'],
       required: true
     }
   },
