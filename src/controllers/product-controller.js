@@ -4,11 +4,6 @@ const { sortBy } = require('../utils/utlis')
 
 class ProductController {
   async listProducts (req, res) {
-    /**
-     * @apiName GetProducts
-     * @apiDefine Get Access All products
-     * @api GET products/ Products Arsy
-    */
     const limit = parseInt(req.query.limit)
     const skip = parseInt(req.query.skip)
     const search = req.query.search
@@ -22,7 +17,7 @@ class ProductController {
         .sort(sort)
         .where('product', type)
       if (products.length <= 0) {
-        handleError({ statusCode: 200, message: 'Product not found' }, res)
+        handleError({ statusCode: 404, message: 'Product not found' }, res)
       } else {
         handleSuccess(products, res)
       }
@@ -49,11 +44,11 @@ class ProductController {
     try {
       const exist = await ProductModel.exists({ name: req.body.name })
       if (exist) {
-        res.json(200, { error: true, message: 'Product Already Exists' })
+        handleError({ error: true, message: 'Product Already Exists' }, res)
       } else {
         const product = await new ProductModel(req.body)
         const result = await product.save()
-        res.json(result)
+        handleSuccess(result, res)
       }
     } catch (error) {
       handleError(error, res)
@@ -66,10 +61,10 @@ class ProductController {
     try {
       const exist = await ProductModel.exists({ name: req.body.name })
       if (exist) {
+        handleError({ statusCode: 200, message: 'Product not found' }, res)
+      } else {
         const update = await ProductModel.updateOne({ _id: id }, { body })
         handleSuccess(update, res)
-      } else {
-        handleError({ statusCode: 200, message: 'Product not found' }, res)
       }
     } catch (error) {
       handleError(error, res)

@@ -7,7 +7,7 @@ const schema = new mongoose.Schema(
       required: true,
       unique: true
     },
-    images: String,
+    images: Array,
     price: Number,
     description: String,
     product: {
