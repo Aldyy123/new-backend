@@ -31,7 +31,7 @@ class ProductController {
     try {
       const product = await ProductModel.checkedFindId(id)
       if (product.length < 1) {
-        handleError({ message: 'Product not found', statusCode: 200 }, res)
+        handleError({ message: 'Product not found', statusCode: 404 }, res)
       } else {
         handleSuccess(product, res)
       }
@@ -64,7 +64,7 @@ class ProductController {
         const update = await ProductModel.updateOne({ _id: id }, { body })
         handleSuccess(update, res)
       } else {
-        handleError({ statusCode: 200, message: 'Product not found' }, res)
+        handleError({ statusCode: 404, message: 'Product not found' }, res)
       }
     } catch (error) {
       handleError(error, res)
