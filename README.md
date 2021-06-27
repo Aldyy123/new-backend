@@ -8,10 +8,8 @@ You Can paste in your postman or insomnia \`\`
 
     https://mongo-arsy.herokuapp.com/
 
-### Example
 
-If you tired check exmaple is below
-
+Schema API for Products
 
 Method | Endpoint  | Description
 ---------|----------|---------
@@ -19,3 +17,13 @@ Method | Endpoint  | Description
  POST | /products/add-product | Adding Product
  GET | /products/get-product/:id | Get profile product
  POST | /products/update-product/:id | Update Product
+
+## Endpoint
+
+###### Params
+Field | Type | Rules | Description
+---------|----------|---------
+ type | String | Required | type product has calling [[games], [printing], [atk]]
+ sort | String | optional |
+ search | String | optional |
+> https://mongo-arsy.herokuapp.com/products
