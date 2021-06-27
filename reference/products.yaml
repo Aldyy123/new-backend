@@ -350,13 +350,52 @@ paths:
                     code: 404
                     message: Product not found
       operationId: get-products-id
-      description: ''
+      description: Get product is specifict
       parameters:
         - schema:
             type: string
           in: header
           name: authorization
           description: Your Token
+  '/products/update-product/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    post:
+      summary: ''
+      operationId: post-products-update-product-id
+      responses:
+        '200':
+          description: OK
+      description: Update Product use ID
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                '':
+                  type: string
+                images:
+                  type:
+                    - string
+                    - array
+                  items:
+                    type: string
+                product:
+                  type: string
+                  enum:
+                    - games
+                    - printing
+                    - atk
+                price:
+                  type: number
+                description:
+                  type: string
+        description: ''
 components:
   schemas:
     Products:
