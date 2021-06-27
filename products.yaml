@@ -1,0 +1,527 @@
+openapi: 3.1.0
+info:
+  title: Arsy Digicom
+  version: '1.0'
+  description: API Private for arsy digicom
+  license: {}
+  summary: Arsy Digicom
+servers:
+  - url: 'https://mongo-arsy.herokuapp.com'
+paths:
+  /products:
+    parameters: []
+    get:
+      summary: Get All products Arsy
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    status: success
+                    code: 200
+                    result:
+                      - _id: 60c8e0790cc7023578642fe4
+                        name: Undangan 1
+                        price: 2000
+                        description: ini cuma descripsi biasa
+                        product: printing
+                        images: 'https://firebasestorage.googleapis.com/v0/b/arsy-70f02.appspot.com/o/1.jpg?alt=media&token=573c900d-4b0d-402f-bdd5-60a6ad2152fe'
+                        __v: 0
+                        createdAt: '2021-06-15T17:16:41.428Z'
+                        updatedAt: '2021-06-15T17:16:41.428Z'
+                properties:
+                  status:
+                    type: string
+                    minLength: 1
+                  code:
+                    type: number
+                  result:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          minLength: 1
+                        name:
+                          type: string
+                          minLength: 1
+                        price:
+                          type: number
+                        description:
+                          type: string
+                          minLength: 1
+                        product:
+                          type: string
+                          minLength: 1
+                        images:
+                          type: string
+                          minLength: 1
+                        createdAt:
+                          type: string
+                          minLength: 1
+                        updatedAt:
+                          type: string
+                          minLength: 1
+                      required:
+                        - name
+                        - price
+                        - description
+                        - product
+                        - images
+                required:
+                  - result
+              examples:
+                example-1:
+                  value:
+                    status: success
+                    code: 200
+                    result:
+                      - _id: 60c8e0790cc7023578642fe4
+                        name: Undangan 1
+                        price: 2000
+                        description: ini cuma descripsi biasa
+                        product: printing
+                        images: 'https://firebasestorage.googleapis.com/v0/b/arsy-70f02.appspot.com/o/1.jpg?alt=media&token=573c900d-4b0d-402f-bdd5-60a6ad2152fe'
+                        __v: 0
+                        createdAt: '2021-06-15T17:16:41.428Z'
+                        updatedAt: '2021-06-15T17:16:41.428Z'
+                      - _id: 60c8e0790cc7023578642fe5
+                        name: Undangan 2
+                        price: 2000
+                        description: ini cuma descripsi biasa
+                        product: printing
+                        images: 'https://firebasestorage.googleapis.com/v0/b/arsy-70f02.appspot.com/o/IMG_20210407_140426.jpg?alt=media&token=2cd1ba25-603e-48b2-bcb3-48ddb620ae79'
+                        __v: 0
+                        createdAt: '2021-06-15T17:16:41.429Z'
+                        updatedAt: '2021-06-15T17:16:41.429Z'
+                      - _id: 60c8e0790cc7023578642fe6
+                        name: Undangan 3
+                        price: 2000
+                        description: ini cuma descripsi biasa
+                        product: printing
+                        images: 'https://firebasestorage.googleapis.com/v0/b/arsy-70f02.appspot.com/o/PXL_20210407_073644432.jpg?alt=media&token=a65b9d88-dd33-4aa1-8fa6-652147b1e57a'
+                        __v: 0
+                        createdAt: '2021-06-15T17:16:41.429Z'
+                        updatedAt: '2021-06-15T17:16:41.429Z'
+                      - _id: 60c8e0790cc7023578642fe7
+                        name: Undangan 4
+                        price: 2000
+                        description: ini cuma descripsi biasa
+                        product: printing
+                        images: 'https://firebasestorage.googleapis.com/v0/b/arsy-70f02.appspot.com/o/PXL_20210407_073841466.jpg?alt=media&token=912f701a-3e7d-412e-91f2-b6487f46ebf7'
+                        __v: 0
+                        createdAt: '2021-06-15T17:16:41.429Z'
+                        updatedAt: '2021-06-15T17:16:41.429Z'
+                      - _id: 60c8e0790cc7023578642fe8
+                        name: Undangan 5
+                        price: 2000
+                        description: ini cuma descripsi biasa
+                        product: printing
+                        images: 'https://firebasestorage.googleapis.com/v0/b/arsy-70f02.appspot.com/o/PXL_20210407_074702575.jpg?alt=media&token=0c5e6ede-aecc-49ae-937e-90b6d0dbd03c'
+                        __v: 0
+                        createdAt: '2021-06-15T17:16:41.429Z'
+                        updatedAt: '2021-06-15T17:16:41.429Z'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  status:
+                    type: string
+                    minLength: 1
+                  code:
+                    type: number
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - code
+                  - message
+                x-examples:
+                  example-1:
+                    status: error
+                    code: 404
+                    message: Product not found
+              examples:
+                example-1:
+                  value:
+                    status: Error
+                    code: 404
+                    message: Products Not Found
+      operationId: get-products
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: type
+          description: 'type in product [ ''game, printing, atk]'
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: sort
+          description: Sortir price and date
+        - schema:
+            type: string
+          in: query
+          name: search
+          description: For searching product
+      description: GEt All Products Arsy
+      x-internal: false
+  /products/add-product:
+    post:
+      summary: Create New User
+      operationId: post-product
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                images:
+                  type:
+                    - string
+                    - array
+                  items:
+                    type: string
+                price:
+                  type: number
+                description:
+                  type: string
+                product:
+                  type: string
+                  enum:
+                    - games
+                    - atk
+                    - printing
+              required:
+                - name
+                - images
+                - price
+                - description
+                - product
+            examples: {}
+        description: New Product add to database
+      description: Add Product to database
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    status: success
+                    code: 200
+                    result:
+                      _id: 60d7ee84ef4c7d00153fbf4f
+                      name: asd
+                      price: 200
+                      images: asdasd
+                      description: asdasd
+                      product: games
+                      createdAt: '2021-06-27T03:20:36.369Z'
+                      updatedAt: '2021-06-27T03:20:36.369Z'
+                      __v: 0
+                properties:
+                  status:
+                    type: string
+                    minLength: 1
+                  code:
+                    type: number
+                  result:
+                    type: object
+                    required:
+                      - _id
+                      - name
+                      - price
+                      - images
+                      - description
+                      - product
+                      - createdAt
+                      - updatedAt
+                    properties:
+                      _id:
+                        type: string
+                        minLength: 1
+                      name:
+                        type: string
+                        minLength: 1
+                      price:
+                        type: number
+                      images:
+                        type: string
+                        minLength: 1
+                      description:
+                        type: string
+                        minLength: 1
+                      product:
+                        type: string
+                        minLength: 1
+                      createdAt:
+                        type: string
+                        minLength: 1
+                      updatedAt:
+                        type: string
+                        minLength: 1
+                required:
+                  - status
+                  - code
+                  - result
+              examples:
+                example-1:
+                  value:
+                    status: success
+                    code: 200
+                    result:
+                      _id: 60d7ee84ef4c7d00153fbf4f
+                      name: asd
+                      price: 200
+                      images: asdasd
+                      description: asdasd
+                      product: games
+                      createdAt: '2021-06-27T03:20:36.369Z'
+                      updatedAt: '2021-06-27T03:20:36.369Z'
+                      __v: 0
+    parameters: []
+  '/products/get-product/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Get Id product to detail
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    status: success
+                    code: 200
+                    result:
+                      _id: 60c8e0790cc7023578642fe5
+                      name: Undangan 2
+                      price: 2000
+                      description: ini cuma descripsi biasa
+                      product: printing
+                      images: 'https://firebasestorage.googleapis.com/v0/b/arsy-70f02.appspot.com/o/IMG_20210407_140426.jpg?alt=media&token=2cd1ba25-603e-48b2-bcb3-48ddb620ae79'
+                      __v: 0
+                      createdAt: '2021-06-15T17:16:41.429Z'
+                      updatedAt: '2021-06-15T17:16:41.429Z'
+                properties:
+                  status:
+                    type: string
+                    minLength: 1
+                  code:
+                    type: number
+                  result:
+                    type: object
+                    required:
+                      - _id
+                      - name
+                      - price
+                      - description
+                      - product
+                      - images
+                    properties:
+                      _id:
+                        type: string
+                        minLength: 1
+                      name:
+                        type: string
+                        minLength: 1
+                      price:
+                        type: number
+                      description:
+                        type: string
+                        minLength: 1
+                      product:
+                        type: string
+                        minLength: 1
+                      images:
+                        type: string
+                        minLength: 1
+                      createdAt:
+                        type: string
+                        minLength: 1
+                      updatedAt:
+                        type: string
+                        minLength: 1
+                required:
+                  - status
+                  - code
+                  - result
+              examples:
+                example-1:
+                  value:
+                    status: success
+                    code: 200
+                    result:
+                      _id: 60c8e0790cc7023578642fe5
+                      name: Undangan 2
+                      price: 2000
+                      description: ini cuma descripsi biasa
+                      product: printing
+                      images: 'https://firebasestorage.googleapis.com/v0/b/arsy-70f02.appspot.com/o/IMG_20210407_140426.jpg?alt=media&token=2cd1ba25-603e-48b2-bcb3-48ddb620ae79'
+                      __v: 0
+                      createdAt: '2021-06-15T17:16:41.429Z'
+                      updatedAt: '2021-06-15T17:16:41.429Z'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  status:
+                    type: string
+                    minLength: 1
+                  code:
+                    type: number
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - code
+                  - message
+                x-examples:
+                  example-1:
+                    status: error
+                    code: 200
+                    message: Product not found
+              examples:
+                example-1:
+                  value:
+                    status: error
+                    code: 404
+                    message: Product not found
+      operationId: get-products-id
+      description: Get product is specifict
+      parameters: []
+  '/products/update-product/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    post:
+      summary: ''
+      operationId: post-products-update-product-id
+      responses:
+        '200':
+          description: OK
+      description: Update Product use ID
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                '':
+                  type: string
+                images:
+                  type:
+                    - string
+                    - array
+                  items:
+                    type: string
+                product:
+                  type: string
+                  enum:
+                    - games
+                    - printing
+                    - atk
+                price:
+                  type: number
+                description:
+                  type: string
+        description: ''
+components:
+  schemas:
+    Products:
+      title: Products
+      type: object
+      description: ''
+      examples:
+        - _id: 60c8e0790cc7023578642fe5
+          name: Undangan 2
+          price: 2000
+          description: ini cuma descripsi biasa
+          product: printing
+          images: 'https://firebasestorage.googleapis.com/v0/b/arsy-70f02.appspot.com/o/IMG_20210407_140426.jpg?alt=media&token=2cd1ba25-603e-48b2-bcb3-48ddb620ae79'
+          __v: 0
+          createdAt: '2021-06-15T17:16:41.429Z'
+          updatedAt: '2021-06-15T17:16:41.429Z'
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+          format: unique
+        name:
+          type: string
+          format: unique
+        images:
+          type: array
+          items:
+            type: string
+        price:
+          type: number
+          format: number
+        createDate:
+          type: string
+          format: date
+          description: The date that the user was created.
+        description:
+          type: string
+        product:
+          type: string
+          enum:
+            - games
+            - printing
+            - atk
+      required:
+        - id
+        - name
+        - images
+        - price
+        - description
+        - product
+  securitySchemes:
+    Authorization:
+      name: Authorization
+      type: apiKey
+      in: header
+      description: ''
+  responses: {}
+security:
+  - Authorization: []
