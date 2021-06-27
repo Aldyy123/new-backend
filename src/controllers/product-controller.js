@@ -61,10 +61,10 @@ class ProductController {
     try {
       const exist = await ProductModel.exists({ name: req.body.name })
       if (exist) {
-        handleError({ statusCode: 200, message: 'Product not found' }, res)
-      } else {
         const update = await ProductModel.updateOne({ _id: id }, { body })
         handleSuccess(update, res)
+      } else {
+        handleError({ statusCode: 200, message: 'Product not found' }, res)
       }
     } catch (error) {
       handleError(error, res)
