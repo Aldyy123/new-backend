@@ -183,7 +183,7 @@ paths:
       x-internal: false
   /products/add-product:
     post:
-      summary: Create New User
+      summary: Add Product
       operationId: post-product
       requestBody:
         content:
@@ -435,7 +435,7 @@ paths:
         in: path
         required: true
     post:
-      summary: ''
+      summary: Update Product
       operationId: post-products-update-product-id
       responses:
         '200':
