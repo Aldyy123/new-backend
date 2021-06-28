@@ -8,7 +8,7 @@ require('./models/database')
 const { handleError } = require('./middlewares/errorHandle')
 const compression = require('compression')
 
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
 app.use(helmet())
@@ -17,7 +17,6 @@ app.use(route)
 
 app.use((err, req, res, next) => {
   handleError(err, res)
-  console.log('Ini error')
 })
 
 const PORT = process.env.PORT || 8000

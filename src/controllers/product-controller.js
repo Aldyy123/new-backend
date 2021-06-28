@@ -44,7 +44,7 @@ class ProductController {
     try {
       const exist = await ProductModel.exists({ name: req.body.name })
       if (exist) {
-        handleError({ error: true, message: 'Product Already Exists' }, res)
+        handleError({ error: true, message: 'Product Already Exists', statusCode: 404 }, res)
       } else {
         const product = await new ProductModel(req.body)
         const result = await product.save()
