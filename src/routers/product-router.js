@@ -28,7 +28,7 @@ Router.get('/', Token.verifyToken, productController.listProducts)
  * @apiSuccess (200) {String} description
  * @apiSuccess (200) {String} product
 */
-Router.route('/add-product').post(Token.verifyToken, productController.saveProduct)
+Router.route('/add-product').post(productController.saveProduct)
 /**
  * @api {POST} products/update-product/:id
  * @apiName UpdateProduct

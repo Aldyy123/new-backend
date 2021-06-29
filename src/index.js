@@ -8,7 +8,7 @@ require('./models/database')
 const { handleError } = require('./middlewares/errorHandle')
 const compression = require('compression')
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cors())
 app.use(helmet())

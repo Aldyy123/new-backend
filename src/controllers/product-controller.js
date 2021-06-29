@@ -19,7 +19,8 @@ class ProductController {
       if (products.length <= 0) {
         handleError({ statusCode: 404, message: 'Product not found' }, res)
       } else {
-        handleSuccess(products, res)
+        const count = await ProductModel.countDocuments({ product: type })
+        handleSuccess({ products, count }, res)
       }
     } catch (error) {
       handleError(error, res)
@@ -41,6 +42,7 @@ class ProductController {
   }
 
   async saveProduct (req, res) {
+    console.log(req.body)
     try {
       const exist = await ProductModel.exists({ name: req.body.name })
       if (exist) {
@@ -51,7 +53,7 @@ class ProductController {
         handleSuccess(result, res)
       }
     } catch (error) {
-      handleError(error, res)
+      throw new Error(error)
     }
   }
 
