@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
 
 const schema = new mongoose.Schema(
   {
@@ -21,6 +22,7 @@ const schema = new mongoose.Schema(
   }
 )
 
+
 schema.statics = {
   async checkedFindId (id) {
     if (!mongoose.isValidObjectId(id)) return []
@@ -28,4 +30,5 @@ schema.statics = {
   }
 }
 
+schema.plugin(mongoosePaginate)
 module.exports = mongoose.model('Product', schema)

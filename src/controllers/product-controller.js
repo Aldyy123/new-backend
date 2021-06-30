@@ -4,8 +4,9 @@ const { sortBy } = require('../utils/utlis')
 
 class ProductController {
   async listProducts (req, res) {
-    const limit = parseInt(req.query.limit)
-    const skip = parseInt(req.query.skip)
+    const limit = parseInt(req.query.limit) || 2
+    const page = parseInt(req.query.page) || 1
+    const perPage = (page - 1) * limit
     const search = req.query.search
     const regex = new RegExp(search, 'gi')
     const type = req.query.type
@@ -13,14 +14,18 @@ class ProductController {
     try {
       const products = await ProductModel.find({ name: regex })
         .limit(limit)
-        .skip(skip)
+        .skip(perPage)
         .sort(sort)
         .where('product', type)
+      // const products = await ProductModel.paginate({ name: regex }, { limit: limit, page: skip, sort: sort }, { mongoose: ProductModel.where('product', type) })
+      // console.log(products.filters(product => console.log(product)))
+      // res.json(products)
+      // const apa = (skip * limit === 0) ? 1 : skip * limit=
       if (products.length <= 0) {
         handleError({ statusCode: 404, message: 'Product not found' }, res)
       } else {
         const count = await ProductModel.countDocuments({ product: type })
-        handleSuccess({ products, count }, res)
+        handleSuccess({ products, count, page, totalPage: count / limit, perPage: limit }, res)
       }
     } catch (error) {
       handleError(error, res)
