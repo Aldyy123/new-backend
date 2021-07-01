@@ -18,7 +18,7 @@ class ProductController {
         .sort(sort)
         .where('product', type)
       if (products.length <= 0) {
-        handleError({ statusCode: 404, message: 'Product not found' }, res)
+        handleError({ statusCode: 200, message: 'Product not found' }, res)
       } else {
         const count = await ProductModel.countDocuments({ product: type })
         const totalPage = Math.round(count / limit)
@@ -34,7 +34,7 @@ class ProductController {
     try {
       const product = await ProductModel.checkedFindId(id)
       if (product.length < 1) {
-        handleError({ message: 'Product not found', statusCode: 404 }, res)
+        handleError({ message: 'Product not found', statusCode: 200 }, res)
       } else {
         handleSuccess(product, res)
       }
@@ -49,7 +49,7 @@ class ProductController {
       const exist = await ProductModel.exists({ name: req.body.name })
       if (exist) {
         handleError(
-          { error: true, message: 'Product Already Exists', statusCode: 404 },
+          { error: true, message: 'Product Already Exists', statusCode: 200 },
           res
         )
       } else {
@@ -71,7 +71,7 @@ class ProductController {
         const update = await ProductModel.updateOne({ _id: id }, { body })
         handleSuccess(update, res)
       } else {
-        handleError({ statusCode: 404, message: 'Product not found' }, res)
+        handleError({ statusCode: 200, message: 'Product not found' }, res)
       }
     } catch (error) {
       handleError(error, res)
