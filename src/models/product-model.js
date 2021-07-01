@@ -22,7 +22,6 @@ const schema = new mongoose.Schema(
   }
 )
 
-
 schema.statics = {
   async checkedFindId (id) {
     if (!mongoose.isValidObjectId(id)) return []

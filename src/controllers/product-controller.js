@@ -3,7 +3,7 @@ const { handleError, handleSuccess } = require('../middlewares/errorHandle')
 const { sortBy } = require('../utils/utlis')
 
 class ProductController {
-  async listProducts(req, res) {
+  async listProducts (req, res) {
     const limit = parseInt(req.query.limit) || 2
     const page = parseInt(req.query.page) || 1
     const perPage = (page - 1) * limit
@@ -29,7 +29,7 @@ class ProductController {
     }
   }
 
-  async getProduct(req, res) {
+  async getProduct (req, res) {
     const { id } = req.params
     try {
       const product = await ProductModel.checkedFindId(id)
@@ -43,14 +43,14 @@ class ProductController {
     }
   }
 
-  async saveProduct(req, res) {
+  async saveProduct (req, res) {
     console.log(req.body)
     try {
       const exist = await ProductModel.exists({ name: req.body.name })
       if (exist) {
         handleError(
           { error: true, message: 'Product Already Exists', statusCode: 404 },
-          res,
+          res
         )
       } else {
         const product = await new ProductModel(req.body)
@@ -62,7 +62,7 @@ class ProductController {
     }
   }
 
-  async updateProduct(req, res) {
+  async updateProduct (req, res) {
     const { id } = req.params.id
     const body = req.body
     try {
