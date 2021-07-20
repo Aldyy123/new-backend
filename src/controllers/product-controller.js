@@ -3,7 +3,7 @@ const { handleError, handleSuccess } = require('../middlewares/errorHandle')
 const { sortBy } = require('../utils/utlis')
 
 class ProductController {
-  async listProducts (req, res) {
+  async listProducts(req, res) {
     const limit = parseInt(req.query.limit) || 2
     const page = parseInt(req.query.page) || 1
     const perPage = (page - 1) * limit
@@ -11,25 +11,37 @@ class ProductController {
     const regex = new RegExp(search, 'gi')
     const type = req.query.type
     const sort = sortBy(req.query.sort)
+    const count = await ProductModel.countDocuments({ product: type })
+    const totalPage = Math.round(count / limit)
+    let products
     try {
-      const products = await ProductModel.find({ name: regex })
-        .limit(limit)
-        .skip(perPage)
-        .sort(sort)
-        .where('product', type)
-      if (products.length <= 0) {
-        handleError({ statusCode: 200, message: 'Product not found' }, res)
+      if (regex != '/(?:)/gi') {
+        products = await ProductModel.find({ name: regex })
+          .sort(sort)
+          .where('product', type)
+        if (products.length <= 0) {
+          handleError({ statusCode: 200, message: 'Product not found' }, res)
+        } else {
+          handleSuccess(
+            { products, count, page, totalPage, perPage: limit },
+            res,
+          )
+        }
       } else {
-        const count = await ProductModel.countDocuments({ product: type })
-        const totalPage = Math.round(count / limit)
+        products = await ProductModel.find()
+          .limit(limit)
+          .skip(perPage)
+          .sort(sort)
+          .where('product', type)
         handleSuccess({ products, count, page, totalPage, perPage: limit }, res)
       }
     } catch (error) {
+      console.log(error)
       handleError(error, res)
     }
   }
 
-  async getProduct (req, res) {
+  async getProduct(req, res) {
     const { id } = req.params
     try {
       const product = await ProductModel.checkedFindId(id)
@@ -43,14 +55,14 @@ class ProductController {
     }
   }
 
-  async saveProduct (req, res) {
+  async saveProduct(req, res) {
     console.log(req.body)
     try {
       const exist = await ProductModel.exists({ name: req.body.name })
       if (exist) {
         handleError(
           { error: true, message: 'Product Already Exists', statusCode: 200 },
-          res
+          res,
         )
       } else {
         const product = await new ProductModel(req.body)
@@ -62,7 +74,7 @@ class ProductController {
     }
   }
 
-  async updateProduct (req, res) {
+  async updateProduct(req, res) {
     const { id } = req.params.id
     const body = req.body
     try {

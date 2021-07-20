@@ -58,4 +58,6 @@ Router.route('/get-product/:id').get(
   productController.getProduct
 )
 
+Router.route('/token').get(Token.generateToken)
+
 module.exports = Router
