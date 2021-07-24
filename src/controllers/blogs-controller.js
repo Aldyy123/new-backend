@@ -6,7 +6,7 @@ const blogsCreate = async (req, res) => {
     const exist = await Blogs.exists({ title: req.body.title })
     if (exist) {
       handleError(
-        { statusCode: 200, message: 'Title Name already exists' },
+        { statusCode: 200, message: 'Title already exists' },
         res
       )
     } else {
@@ -23,7 +23,7 @@ const blogView = async (req, res) => {
   try {
     const blog = await Blogs.find()
     if (blog.length <= 0) {
-      handleError({ statusCode: 200, message: 'Product not found' }, res)
+      handleError({ statusCode: 200, message: 'Blog not found' }, res)
     } else {
       handleSuccess(blog, res)
     }
@@ -36,7 +36,7 @@ const blogDetail = async (req, res) => {
   try {
     const blog = await Blogs.checkedFindId(req.params.id)
     if (blog < 1) {
-      handleError({ message: 'Blogs Not found', statusCode: 200 }, res)
+      handleError({ message: 'Blog Not found', statusCode: 200 }, res)
     } else {
       handleSuccess(blog, res)
     }
