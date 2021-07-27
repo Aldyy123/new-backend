@@ -5,7 +5,11 @@ const schema = new mongoose.Schema(
     title: String,
     description: String,
     image: String,
-    author: String
+    author: String,
+    link: {
+      type: String,
+      unique: true
+    }
   },
   {
     timestamps: true

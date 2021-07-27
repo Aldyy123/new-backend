@@ -10,7 +10,14 @@ const blogsCreate = async (req, res) => {
         res
       )
     } else {
-      const blog = await new Blogs(req.body)
+      const dataBlog = {
+        title: req.body.title,
+        link: req.body.title.split(' ').join('-'),
+        image: req.body.image,
+        author: req.body.author,
+        description: req.body.description
+      }
+      const blog = await new Blogs(dataBlog)
       const result = await blog.save()
       handleSuccess(result, res)
     }
