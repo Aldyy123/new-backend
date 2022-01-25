@@ -24,6 +24,6 @@ Method | Endpoint  | Description
 | Field  | Type   | Rules    | Description                                           |
 |--------|--------|----------|-------------------------------------------------------|
 | type   | String | Required | type product has calling [[games], [printing], [atk]] |
-| sort   | String | Optional | Sorting product                                       |
+| sort   | String | Optional | Sorting product [asc, desc]                           |
 | page   | number | Optional | Change page product                                   |
 | search | String | Optional | Searching Products                                    |
