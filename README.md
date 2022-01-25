@@ -21,9 +21,9 @@ Method | Endpoint  | Description
 ## Endpoint
 
 ###### Params
-| Field  | Type   | Rules    | Description                                           |
-|--------|--------|----------|-------------------------------------------------------|
-| type   | String | Required | type product has calling [[games], [printing], [atk]] |
-| sort   | String | Optional | Sorting product [asc, desc]                           |
-| page   | number | Optional | Change page product                                   |
-| search | String | Optional | Searching Products                                    |
+| Field  | Type   | Rules    | Description                                                                                    |
+|--------|--------|----------|------------------------------------------------------------------------------------------------|
+| type   | String | Required | type product has calling [games, printing, atk]                                                |
+| sort   | String | Optional | Sorting product with price and date<br>date [dateasc, datedesc]<br>price [priceasc, pricedesc] |
+| page   | number | Optional | Change page product                                                                            |
+| search | String | Optional | Searching Products                                                                             |
