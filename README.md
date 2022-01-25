@@ -17,6 +17,7 @@ Method | Endpoint  | Description
  POST | /products/add-product | Adding Product
  GET | /products/get-product/:id | Get profile product
  POST | /products/update-product/:id | Update Product
+  GET | /products/token | Get Token
 
 ## Endpoint
 
