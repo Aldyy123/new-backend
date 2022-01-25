@@ -21,8 +21,8 @@ Method | Endpoint  | Description
 ## Endpoint
 
 ###### Params
-| Field | Type | Rules | Description |
-| --------- | ---------- | --------- |
-| type | String | Required | type product has calling [[games], [printing], [atk]] |
-|sort | String | optional | Number |
-| search | String | optional | Number |
+Field | Type | Rules | Description
+--------- | ---------- | ---------
+ type | String | Required | type product has calling [[games], [printing], [atk]]
+ sort | String | optional | Number
+ search | String | optional | Number
