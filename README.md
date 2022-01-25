@@ -26,4 +26,3 @@ Field | Type | Rules | Description
  type | String | Required | type product has calling [[games], [printing], [atk]]
  sort | String | optional |
  search | String | optional |
-> https://mongo-arsy.herokuapp.com/products
