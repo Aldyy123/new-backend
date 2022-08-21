@@ -4,10 +4,10 @@ Arsy Digicom for products and blogs CRUD
 
 ## Access Endpoint
 
-You Can paste in your postman or insomnia \`\`
-
+You Can paste in your postman or insomnia 
+```
     https://mongo-arsy.herokuapp.com/
-
+```
 
 Schema API for Products
 
@@ -28,3 +28,10 @@ Method | Endpoint  | Description
 | sort   | String | Optional | Sorting product with price and date<br>date [dateasc, datedesc]<br>price [priceasc, pricedesc] |
 | page   | number | Optional | Change page product                                                                            |
 | search | String | Optional | Searching Products                                                                             |
+
+---
+
+This Database Inactiv from server mongodb cluster, if you want try the api. You can request permission on owner api. 
+
+Owner API - Mohammad Ardi Trisnaldi
+
