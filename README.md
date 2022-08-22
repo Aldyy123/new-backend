@@ -28,6 +28,7 @@ Method | Endpoint  | Description
 | sort   | String | Optional | Sorting product with price and date<br>date [dateasc, datedesc]<br>price [priceasc, pricedesc] |
 | page   | number | Optional | Change page product                                                                            |
 | search | String | Optional | Searching Products                                                                             |
+| limit | Number | Optional default 2 | Limit the show products to the specified number of products|
 
 ---
 
