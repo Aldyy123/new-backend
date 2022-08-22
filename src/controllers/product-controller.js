@@ -70,7 +70,7 @@ class ProductController {
         handleSuccess(result, res)
       }
     } catch (error) {
-      throw new Error(error)
+      handleError(error, res)
     }
   }
 

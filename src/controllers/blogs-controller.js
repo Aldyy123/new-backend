@@ -29,6 +29,7 @@ const blogsCreate = async (req, res) => {
 const blogView = async (req, res) => {
   try {
     const blog = await Blogs.find()
+    console.log(blog)
     if (blog.length <= 0) {
       handleError({ statusCode: 200, message: 'Blog not found' }, res)
     } else {
