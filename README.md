@@ -6,8 +6,10 @@ Arsy Digicom for products and blogs CRUD
 
 You Can paste in your postman or insomnia 
 ```
-    https://mongo-arsy.herokuapp.com/
+https://mongo-arsy.herokuapp.com/
 ```
+
+## Endpoint
 
 Schema API for Products
 
@@ -17,11 +19,16 @@ Method | Endpoint  | Description
  POST | /products/add-product | Adding Product
  GET | /products/get-product/:id | Get profile product
  POST | /products/update-product/:id | Update Product
-  GET | /products/token | Get Token
+ GET | /products/token | Get Token
+ GET | /blogs | Get All Blogs
+ POST | /blogs/create | Create new Blog
+ GET | /blogs/detail/:id | Get Spefied Blog
+ PUT | /blogs/update/:id | Update blog
 
-## Endpoint
 
-###### Params
+## Params
+
+
 | Field  | Type   | Rules    | Description                                                                                    |
 |--------|--------|----------|------------------------------------------------------------------------------------------------|
 | type   | String | Required | type product has calling [games, printing, atk]                                                |
@@ -30,9 +37,32 @@ Method | Endpoint  | Description
 | search | String | Optional | Searching Products                                                                             |
 | limit | Number | Optional default 2 | Limit the show products to the specified number of products|
 
+
 ---
 
-This Database Inactiv from server mongodb cluster, if you want try the api. You can request permission on owner api. 
+### Body Request Products
 
-Owner API - Mohammad Ardi Trisnaldi
+Field | Rules  | type
+---------|----------|---------
+ name | required | string
+ images | optional | array
+ price | optional | number
+ description | optional | string
+ product | required | enum [games, printing, atk]
+
+### Body Request Blogs
+
+Field | Rules  | type
+---------|----------|---------
+ title | required | string
+ images | required | string
+ description | required | string
+
+
+
+**Note: Get all request products and update or create blogs, must be use token have to generated**
+
+---
+
+##### Owner API - Mohammad Ardi Trisnaldi
 
