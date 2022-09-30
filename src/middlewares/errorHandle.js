@@ -16,7 +16,7 @@ const handleError = (err, res) => {
 }
 
 const handleSuccess = (result, res) => {
-  res.status(200).json({
+  return res.status(200).json({
     status: 'success',
     code: 200,
     result

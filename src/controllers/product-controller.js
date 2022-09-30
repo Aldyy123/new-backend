@@ -62,7 +62,7 @@ class ProductController {
       if (exist) {
         handleError(
           { error: true, message: 'Product Already Exists', statusCode: 200 },
-          res,
+          res
         )
       } else {
         const product = await new ProductModel(req.body)
