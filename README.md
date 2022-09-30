@@ -28,6 +28,7 @@ Method | Endpoint  | Description
 
 ## Params
 
+**this params required when show all product**
 
 | Field  | Type   | Rules    | Description                                                                                    |
 |--------|--------|----------|------------------------------------------------------------------------------------------------|
